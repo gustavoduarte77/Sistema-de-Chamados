@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema de Chamados</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>Sistema de Chamados</h1>
+    <nav>
+      <button data-aba="chamados" class="ativa">Chamados</button>
+      <button data-aba="pessoas">Pessoas</button>
+      <button data-aba="tipos">Tipos de problema</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="aba-chamados">
+      <div class="barra">
+        <select id="f-situacao"><option value="">Todas as situações</option></select>
+        <select id="f-prioridade"><option value="">Todas as prioridades</option></select>
+        <select id="f-tipo"><option value="">Todos os tipos</option></select>
+        <select id="f-tecnico"><option value="">Todos os técnicos</option></select>
+        <span class="espaco"></span>
+        <button id="btn-novo-chamado" class="primario">+ Novo chamado</button>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Título</th><th>Tipo</th><th>Prioridade</th><th>Situação</th><th>Solicitante</th><th>Técnico</th><th>Criado em</th></tr></thead>
+        <tbody id="lista-chamados"></tbody>
+      </table>
+    </section>
+
+    <section id="aba-pessoas" hidden>
+      <div class="barra">
+        <span class="espaco"></span>
+        <button id="btn-nova-pessoa" class="primario">+ Nova pessoa</button>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Nome</th><th>E-mail</th><th>Tipo</th><th>Status</th><th></th></tr></thead>
+        <tbody id="lista-pessoas"></tbody>
+      </table>
+    </section>
+
+    <section id="aba-tipos" hidden>
+      <div class="barra">
+        <span class="espaco"></span>
+        <button id="btn-novo-tipo" class="primario">+ Novo tipo</button>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Nome</th><th>Status</th><th></th></tr></thead>
+        <tbody id="lista-tipos"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <dialog id="modal"><div id="modal-corpo"></div></dialog>
+  <div id="toast" hidden></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum TipoPessoa {
+  solicitante
+  tecnico
+}
+
+enum Prioridade {
+  baixa
+  media
+  alta
+  critica
+}
+
+enum Situacao {
+  aberto
+  em_atendimento
+  resolvido
+  fechado
+  cancelado
+}
+
+model Pessoa {
+  id    Int        @id @default(autoincrement())
+  nome  String     @db.VarChar(150)
+  email String     @unique @db.VarChar(190)
+  tipo  TipoPessoa
+  ativo Boolean    @default(true)
+
+  chamadosAbertos Chamado[]    @relation("Solicitante")
+  chamadosTecnico Chamado[]    @relation("Tecnico")
+  atribuicoes     Atribuicao[]
+  comentarios     Comentario[]
+}
+
+model TipoProblema {
+  id    Int     @id @default(autoincrement())
+  nome  String  @unique @db.VarChar(100)
+  ativo Boolean @default(true)
+
+  chamados Chamado[]
+}
+
+model Chamado {
+  id             Int        @id @default(autoincrement())
+  titulo         String     @db.VarChar(100)
+  descricao      String     @db.Text
+  prioridade     Prioridade @default(media)
+  situacao       Situacao   @default(aberto)
+  solicitanteId  Int
+  tecnicoId      Int?
+  tipoProblemaId Int
+  criadoEm       DateTime   @default(now())
+  resolvidoEm    DateTime?
+
+  solicitante  Pessoa       @relation("Solicitante", fields: [solicitanteId], references: [id], onDelete: Restrict)
+  tecnico      Pessoa?      @relation("Tecnico", fields: [tecnicoId], references: [id], onDelete: Restrict)
+  tipoProblema TipoProblema @relation(fields: [tipoProblemaId], references: [id], onDelete: Restrict)
+  atribuicoes  Atribuicao[]
+  comentarios  Comentario[]
+
+  @@index([situacao])
+  @@index([prioridade])
+  @@index([tipoProblemaId])
+  @@index([tecnicoId, situacao])
+}
+
+/// Histórico de designações: mantém "envolvido" quem já foi técnico do chamado (regra 4).
+model Atribuicao {
+  id        Int      @id @default(autoincrement())
+  chamadoId Int
+  tecnicoId Int
+  criadoEm  DateTime @default(now())
+
+  chamado Chamado @relation(fields: [chamadoId], references: [id], onDelete: Restrict)
+  tecnico Pessoa  @relation(fields: [tecnicoId], references: [id], onDelete: Restrict)
+
+  @@index([tecnicoId])
+}
+
+model Comentario {
+  id        Int      @id @default(autoincrement())
+  chamadoId Int
+  autorId   Int
+  texto     String   @db.Text
+  criadoEm  DateTime @default(now())
+
+  chamado Chamado @relation(fields: [chamadoId], references: [id], onDelete: Restrict)
+  autor   Pessoa  @relation(fields: [autorId], references: [id], onDelete: Restrict)
+
+  @@index([chamadoId])
+}

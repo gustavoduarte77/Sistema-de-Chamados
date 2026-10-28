@@ -1,0 +1,60 @@
+:root {
+  --bg: #f4f6f9; --card: #fff; --txt: #1f2933; --suave: #64748b; --borda: #dde3ea;
+  --azul: #2563eb; --azul-esc: #1d4ed8; --verm: #dc2626;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.45 system-ui, "Segoe UI", sans-serif; background: var(--bg); color: var(--txt); }
+.topo { background: #111827; color: #fff; display: flex; align-items: center; gap: 32px; padding: 0 24px; }
+.topo h1 { font-size: 18px; margin: 0; padding: 16px 0; }
+.topo nav { display: flex; gap: 4px; }
+.topo nav button { background: none; border: 0; color: #cbd5e1; padding: 18px 14px; cursor: pointer; font-size: 15px; border-bottom: 3px solid transparent; }
+.topo nav button.ativa { color: #fff; border-bottom-color: var(--azul); }
+main { max-width: 1200px; margin: 24px auto; padding: 0 16px; }
+.barra { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+.espaco { flex: 1; }
+table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--borda); }
+th { background: #eef2f7; font-size: 13px; color: var(--suave); text-transform: uppercase; letter-spacing: .03em; }
+tbody tr.clicavel { cursor: pointer; }
+tbody tr.clicavel:hover { background: #f1f5fb; }
+td.vazio { text-align: center; color: var(--suave); padding: 28px; }
+td.acoes { text-align: right; white-space: nowrap; }
+input, select, textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--borda); border-radius: 6px; background: #fff; color: inherit; }
+textarea { width: 100%; min-height: 80px; resize: vertical; }
+button { font: inherit; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--borda); background: #fff; cursor: pointer; }
+button:hover { background: #f1f5f9; }
+button.primario { background: var(--azul); border-color: var(--azul); color: #fff; }
+button.primario:hover { background: var(--azul-esc); }
+button.perigo { color: var(--verm); border-color: #f3b4b4; }
+button.pequeno { padding: 4px 10px; font-size: 13px; }
+.badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #e5e7eb; color: #374151; }
+.b-aberto { background: #dbeafe; color: #1e40af; }
+.b-em_atendimento { background: #fef3c7; color: #92400e; }
+.b-resolvido { background: #dcfce7; color: #166534; }
+.b-fechado { background: #e5e7eb; color: #374151; }
+.b-cancelado { background: #fee2e2; color: #991b1b; }
+.b-baixa { background: #e0f2fe; color: #075985; }
+.b-media { background: #e5e7eb; color: #374151; }
+.b-alta { background: #ffedd5; color: #9a3412; }
+.b-critica { background: #fee2e2; color: #991b1b; }
+.b-ativo { background: #dcfce7; color: #166534; }
+.b-inativo { background: #e5e7eb; color: #6b7280; }
+dialog { border: 0; border-radius: 10px; padding: 0; width: min(720px, 94vw); max-height: 92vh; box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+dialog::backdrop { background: rgba(15, 23, 42, .5); }
+#modal-corpo { padding: 22px; }
+#modal-corpo h2 { margin: 0 0 14px; font-size: 19px; }
+#modal-corpo h3 { margin: 20px 0 8px; font-size: 15px; color: var(--suave); text-transform: uppercase; letter-spacing: .03em; }
+.campo { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.campo label { font-size: 13px; color: var(--suave); font-weight: 600; }
+.campo input, .campo select { width: 100%; }
+.linha { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.rodape { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px 16px; margin-bottom: 10px; }
+.meta div span { display: block; font-size: 12px; color: var(--suave); }
+.desc { background: #f8fafc; border: 1px solid var(--borda); border-radius: 6px; padding: 10px 12px; white-space: pre-wrap; }
+.coment { border-left: 3px solid var(--borda); padding: 6px 12px; margin-bottom: 8px; background: #fafbfc; }
+.coment small { color: var(--suave); }
+.coment p { margin: 4px 0 0; white-space: pre-wrap; }
+#toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); background: #111827; color: #fff; padding: 12px 18px; border-radius: 8px; max-width: 90vw; z-index: 10000; box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+#toast.erro { background: var(--verm); }
+.dica { color: var(--suave); font-size: 13px; }
